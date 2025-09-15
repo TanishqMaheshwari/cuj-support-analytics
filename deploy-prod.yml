@@ -1,0 +1,28 @@
+name: cuj-support-analytics-deployment 
+
+concurrency: prod
+
+on:
+  push: 
+    branches: [ main ]
+
+jobs:
+  deploy-prod: 
+    runs-on: ubuntu-latest
+    # env:  
+
+    #       # DATABRICKS_AUTH_TYPE: github-oidc
+    #       # DATABRICKS_HOST: https://dbc-9adcb6b4-7237.cloud.databricks.com/
+    #       # DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+    #       # DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_TOKEN }}
+    #       # DATABRICKS_BUNDLE_ENV: prod 
+    steps:
+      - uses: actions/checkout@v4
+      - uses: databricks/setup-cli@main
+      # - run: databricks bundle validate -t prod 
+      - run: databricks bundle deploy -t prod
+        working-directory: .
+        env: 
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_BUNDLE_ENV: prod
+        
