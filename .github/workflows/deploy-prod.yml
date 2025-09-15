@@ -21,8 +21,7 @@ jobs:
       - uses: databricks/setup-cli@main
       # - run: databricks bundle validate -t prod 
       - run: databricks bundle deploy -t prod
-        working-directory: .
         env: 
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+          DATABRICKS_: ${{ secrets.PAT }}
           DATABRICKS_BUNDLE_ENV: prod
         
