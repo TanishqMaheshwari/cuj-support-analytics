@@ -22,6 +22,6 @@ jobs:
       # - run: databricks bundle validate -t prod 
       - run: databricks bundle deploy -t prod
         env: 
-          DATABRICKS_: ${{ secrets.PAT }}
+          DATABRICKS_TOKEN: ${{ secrets.PAT }}
           DATABRICKS_BUNDLE_ENV: prod
         
