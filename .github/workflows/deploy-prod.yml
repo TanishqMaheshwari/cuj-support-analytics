@@ -18,6 +18,7 @@ jobs:
           DATABRICKS_TOKEN: $${{ secrets.DATABRICKS_TOKEN }}
           DATABRICKS_BUNDLE_ENV: prod 
       - run: databricks bundle deploy -t prod
+        working-directory: .
         env:  
           DATABRICKS_TOKEN: $${{ secrets.DATABRICKS_TOKEN }}
           DATABRICKS_BUNDLE_ENV: prod 
