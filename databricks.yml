@@ -32,4 +32,4 @@ targets:
     workspace: 
       host: https://dbc-9adcb6b4-7237.cloud.databricks.com/
     run_as:
-      service_principal_name: dd855d54-284b-4654-b188-d109278c5fef
+      service_principal_name: ${workspace.current_user.userName}
