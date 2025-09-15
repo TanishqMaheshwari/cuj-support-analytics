@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=bundle_config_schema.json
+bundle: 
+  name: cuj-support-analytics 
+
+resources:
+  jobs:
+    SLA_violation_deepdive:
+      name: SLA violation deepdive
+      email_notifications:
+        on_failure:
+          - ${workspace.current_user.userName}
+      trigger:
+        pause_status: UNPAUSED
+        periodic:
+          interval: 1
+          unit: DAYS
+      tasks:
+        - task_key: SLA_violation_deepdive
+          notebook_task:
+            notebook_path: ./SLA violation deepdive.ipynb
+            source: WORKSPACE
+
+
+
+targets:
+  dev: 
+    workspace: 
+      host: https://e2-dogfood.staging.cloud.databricks.com/
+    run_as: 
+      - user_name: ${workspace.current_user.userName}
+  prod: 
+    workspace: 
+      host: https://dbc-9adcb6b4-7237.cloud.databricks.com/
+    run_as:
+      service_principal_name: dd855d54-284b-4654-b188-d109278c5fef

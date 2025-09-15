@@ -1,0 +1,23 @@
+name: cuj-support-analytics-deployment 
+
+concurrency: prod
+
+on:
+  push: 
+    branches: [ main ]
+
+jobs:
+  deploy-prod: 
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      - run: databricks bundle validate -t prod 
+        env:  
+          DATABRICKS_TOKEN: $${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_BUNDLE_ENV: prod 
+      - run: databricks bundle deploy -t prod
+        env:  
+          DATABRICKS_TOKEN: $${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_BUNDLE_ENV: prod 
+        
